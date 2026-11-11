@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+    <persistence-unit name="library-persistence-unit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.library.domain.entity.Author</class>
+        <class>com.library.domain.entity.Book</class>
+        <class>com.library.domain.entity.Loan</class>
+        <class>com.library.domain.entity.Member</class>
+
+        <properties>
+            <!-- MySQL connection-->
+            <property name="jakarta.persistence.jdbc.driver"
+                    value="com.mysql.cj.jdbc.Driver"/>
+            <!-- Replace these values with your local MySQL credentials before running the application. -->
+            <property name="jakarta.persistence.jdbc.url"
+                    value="jdbc:mysql://localhost:3306/library_db"/>
+            <property name="jakarta.persistence.jdbc.user"
+                    value="YOUR_DATABASE_USERNAME"/>
+            <property name="jakarta.persistence.jdbc.password"
+                    value="YOUR_DATABASE_PASSWORD"/>
+
+            <!-- Hibernate configuration -->
+            <property name="hibernate.hbm2ddl.auto"
+                      value="update"/>
+            <property name="hibernate.show_sql"
+                      value="false"/>
+            <property name="hibernate.format_sql"
+                      value="false"/>
+        </properties>
+    </persistence-unit>
+</persistence>

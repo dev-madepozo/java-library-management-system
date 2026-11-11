@@ -1,4 +1,4 @@
-package com.library.ui;
+package com.library.presentation;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,6 +9,7 @@ import com.library.domain.entity.Book;
 import com.library.domain.entity.Loan;
 import com.library.domain.entity.Member;
 import com.library.domain.enums.LoanStatus;
+import com.library.domain.exception.AuthorNotFoundException;
 import com.library.service.AuthorService;
 import com.library.service.BookService;
 import com.library.service.LoanService;
@@ -118,7 +119,7 @@ public class LibraryMenu {
             Author selectedAuthor = authors.stream()
                     .filter(author -> author.getId().equals(authorId))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Author not found."));
+                    .orElseThrow(() -> new AuthorNotFoundException("Author not found."));
             Book book = bookService.createBook(title, isbn, publicationYear, selectedAuthor);
 
             System.out.println("\nBook registered successfully!");
@@ -290,7 +291,7 @@ public class LibraryMenu {
 
             Loan returnedBook = loanService.returnBook(loanId);
 
-            System.out.println("\nBook returned successfully!");
+            System.out.println("\nBook returned successfully.");
             displayLoanDetails(returnedBook);
             System.out.println("Return Date: " + returnedBook.getReturnedAt());
 

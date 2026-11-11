@@ -16,8 +16,8 @@ import org.mockito.Mockito;
 
 import com.library.domain.entity.Author;
 import com.library.domain.entity.Book;
-import com.library.exception.AuthorNotFoundException;
-import com.library.exception.BookAlreadyExistsException;
+import com.library.domain.exception.AuthorNotFoundException;
+import com.library.domain.exception.BookAlreadyExistsException;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookRepository;
 

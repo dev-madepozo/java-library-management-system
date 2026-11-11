@@ -126,9 +126,11 @@ src/
     │       │       ├── HibernateLoanRepository.java
     │       │       ├── JpaTransactionManager.java
     │       │       └── JpaEntityManagerContext.java
-    │       ├── scheduler/
-    │       │   └── OverdueLoanScheduler.java
-    │       └── ... CLI classes (LibraryMenu, ConsoleTable, etc.)
+    │       ├── presentation/
+    │       │   ├── LibraryMenu.java
+    │       │   └── ConsoleTable.java
+    │       └── scheduler/
+    │           └── OverdueLoanScheduler.java
     └── resources/
         └── META-INF/
             └── persistence.xml

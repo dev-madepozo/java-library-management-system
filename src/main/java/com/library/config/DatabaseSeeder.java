@@ -68,7 +68,7 @@ public class DatabaseSeeder {
 
             // Create Member
 
-            memberRepository.save(new Member("Manuel Del Pozo", "madepozo@gmail.co"));
+            memberRepository.save(new Member("Joe Doe", "joedoe@example.com"));
 
             System.out.println("Database seeding completed!");
         } finally {

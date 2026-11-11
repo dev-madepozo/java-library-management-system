@@ -16,16 +16,6 @@ public class LazyLoadingTest {
         try {
             BookRepository bookRepository = new HibernateBookRepository(emf);
 
-            // Book book = bookRepository.findByIdWithAuthor(1L).orElseThrow();
-            // System.out.println("Book: " + book.getTitle());
-            // System.out.println("Author: " + book.getAuthor().getName());
-
-            // List<String> bookTitles = bookRepository.findAllTitles();
-
-            // for (String title : bookTitles) {
-            // System.out.println(title);
-            // }
-
             List<BookSummaryDTO> summaries = bookRepository.findAllBookSummaries();
 
             for (BookSummaryDTO summary : summaries) {

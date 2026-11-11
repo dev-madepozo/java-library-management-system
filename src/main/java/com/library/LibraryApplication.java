@@ -10,7 +10,7 @@ import com.library.repository.AuthorRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.LoanRepository;
 import com.library.repository.MemberRepository;
-
+import com.library.scheduler.OverdueLoanScheduler;
 import com.library.service.AuthorService;
 import com.library.service.BookService;
 import com.library.service.LoanService;
@@ -44,6 +44,10 @@ public class LibraryApplication {
                 memberRepository,
                 transactionManager);
 
+        // Instantiate the scheduler
+        OverdueLoanScheduler overdueLoanScheduler = new OverdueLoanScheduler(loanRepository);
+
+        // Instantiate the menu
         LibraryMenu menu = new LibraryMenu(
                 authorService,
                 bookService,
@@ -51,9 +55,17 @@ public class LibraryApplication {
                 memberService);
 
         try {
+            // Run the scheduler
+            overdueLoanScheduler.start();
+
+            // Run the menu
             menu.start();
         } finally {
-            emFactory.close();
+            try {
+                overdueLoanScheduler.stop();
+            } finally {
+                emFactory.close();
+            }
         }
     }
 }

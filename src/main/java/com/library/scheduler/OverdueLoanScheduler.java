@@ -14,6 +14,7 @@ public class OverdueLoanScheduler {
 
     private final LoanRepository loanRepository;
     private final ScheduledExecutorService scheduler;
+    private boolean started = false;
 
     public OverdueLoanScheduler(LoanRepository loanRepository) {
         this.loanRepository = loanRepository;
@@ -27,19 +28,41 @@ public class OverdueLoanScheduler {
     }
 
     public void start() {
+        if (started) {
+            return;
+        }
         long initialDelay = getInitialDelay();
+
+        if (scheduler.isShutdown()) {
+            throw new IllegalStateException("Scheduler has been shut down");
+        }
+
         scheduler.scheduleAtFixedRate(() -> {
-            int updatedRows = loanRepository.updateOverdueLoans(LocalDate.now());
-            System.out.println("Overdue loans updated: " + updatedRows);
+            try {
+                int updatedRows = loanRepository.updateOverdueLoans(LocalDate.now());
+                System.out.println("Overdue loans updated: " + updatedRows);
+            } catch (RuntimeException e) {
+                System.err.println("Error updating overdue loans: " + e.getMessage());
+            }
         }, initialDelay, 24, TimeUnit.HOURS);
+        started = true;
+        System.out.println("Overdue Loan Scheduler started. Next execution at midnight.");
     }
 
     public void stop() {
+        if (scheduler.isShutdown()) {
+            return;
+        }
+
+        System.out.println("Stopping Overdue Loan Scheduler...");
         scheduler.shutdown();
 
         try {
             if (!scheduler.awaitTermination(10, TimeUnit.SECONDS)) {
                 scheduler.shutdownNow();
+                System.out.println("Scheduler shutdown forced.");
+            } else {
+                System.out.println("Overdue Loan Scheduler stopped.");
             }
         } catch (InterruptedException e) {
             scheduler.shutdownNow();

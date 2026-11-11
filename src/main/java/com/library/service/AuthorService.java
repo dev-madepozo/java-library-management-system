@@ -20,7 +20,8 @@ public class AuthorService {
         }
 
         String normalizedName = name.trim();
-        Author author = new Author(normalizedName, nationality);
+        String normalizedNationality = nationality.trim();
+        Author author = new Author(normalizedName, normalizedNationality);
         return this.authorRepository.save(author);
     }
 

@@ -5,7 +5,7 @@ import com.library.infrastructure.persistence.HibernateBookRepository;
 import com.library.infrastructure.persistence.HibernateLoanRepository;
 import com.library.infrastructure.persistence.HibernateMemberRepository;
 import com.library.infrastructure.persistence.JpaTransactionManager;
-
+import com.library.presentation.LibraryMenu;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.LoanRepository;
@@ -15,7 +15,6 @@ import com.library.service.AuthorService;
 import com.library.service.BookService;
 import com.library.service.LoanService;
 import com.library.service.MemberService;
-import com.library.ui.LibraryMenu;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

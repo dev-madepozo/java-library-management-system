@@ -16,8 +16,8 @@ import org.mockito.Mockito;
 
 import com.library.domain.entity.Author;
 import com.library.domain.entity.Book;
-import com.library.exception.AuthorNotFoundException;
-import com.library.exception.BookAlreadyExistsException;
+import com.library.domain.exception.AuthorNotFoundException;
+import com.library.domain.exception.DuplicateBookException;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookRepository;
 
@@ -67,7 +67,7 @@ public class BookServiceTest {
         when(bookRepository.findByIsbn("978-0596517748")).thenReturn(Optional.of(existingBook));
 
         // ACT + ASSERT: Execute the method and verify that it throws an exception.
-        assertThrows(BookAlreadyExistsException.class,
+        assertThrows(DuplicateBookException.class,
                 () -> bookService.createBook("Javascript: The Good Parts", "978-0596517748", 2008, author));
 
         verify(bookRepository, Mockito.never()).save(Mockito.any(Book.class));

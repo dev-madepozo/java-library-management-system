@@ -1,4 +1,4 @@
-package com.library.ui;
+package com.library.presentation;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -290,7 +290,7 @@ public class LibraryMenu {
 
             Loan returnedBook = loanService.returnBook(loanId);
 
-            System.out.println("\nBook returned successfully!");
+            System.out.println("\nBook returned successfully.");
             displayLoanDetails(returnedBook);
             System.out.println("Return Date: " + returnedBook.getReturnedAt());
 

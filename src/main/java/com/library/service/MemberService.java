@@ -3,7 +3,7 @@ package com.library.service;
 import java.util.List;
 
 import com.library.domain.entity.Member;
-import com.library.exception.MemberNotFoundException;
+import com.library.domain.exception.MemberNotFoundException;
 import com.library.repository.MemberRepository;
 
 public class MemberService {

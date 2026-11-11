@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import com.library.domain.entity.Author;
 import com.library.domain.entity.Book;
-import com.library.exception.AuthorNotFoundException;
-import com.library.exception.BookAlreadyExistsException;
+import com.library.domain.exception.AuthorNotFoundException;
+import com.library.domain.exception.DuplicateBookException;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookRepository;
 
@@ -42,7 +42,7 @@ public class BookService {
         String normalizedIsbn = isbn.trim();
 
         if (this.bookRepository.findByIsbn(normalizedIsbn).isPresent()) {
-            throw new BookAlreadyExistsException("Book with ISBN = " + normalizedIsbn + " already exists");
+            throw new DuplicateBookException("Book with ISBN = " + normalizedIsbn + " already exists");
         }
 
         Author registeredAuthor = this.authorRepository.findById(author.getId())

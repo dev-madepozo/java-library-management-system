@@ -103,5 +103,4 @@ public class HibernateMemberRepository implements MemberRepository {
             entityManager.close();
         }
     }
-
 }

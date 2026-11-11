@@ -8,10 +8,11 @@ import com.library.domain.entity.Loan;
 import com.library.domain.entity.Member;
 
 import com.library.domain.enums.LoanStatus;
-
-import com.library.exception.BookNotFoundException;
-import com.library.exception.LoanNotFoundException;
-import com.library.exception.MemberNotFoundException;
+import com.library.domain.exception.BookNotAvailableException;
+import com.library.domain.exception.BookNotFoundException;
+import com.library.domain.exception.LoanAlreadyReturnedException;
+import com.library.domain.exception.LoanNotFoundException;
+import com.library.domain.exception.MemberNotFoundException;
 import com.library.infrastructure.persistence.JpaTransactionManager;
 import com.library.repository.BookRepository;
 import com.library.repository.LoanRepository;
@@ -70,11 +71,10 @@ public class LoanService {
                     .orElseThrow(() -> new MemberNotFoundException("Member not found."));
 
             if (loanRepository.existsUnreturnedLoanByBookId(bookId)) {
-                throw new IllegalStateException("Book is already borrowed.");
+                throw new BookNotAvailableException("Book with ID = " + bookId + " is already borrowed.");
             }
 
             Loan loan = new Loan(book, member, loanDate, dueDate, null, LoanStatus.ACTIVE);
-
             return loanRepository.save(loan);
         });
     }
@@ -89,7 +89,7 @@ public class LoanService {
                     .orElseThrow(() -> new LoanNotFoundException("Loan not found."));
 
             if (loan.getStatus() != LoanStatus.ACTIVE && loan.getStatus() != LoanStatus.OVERDUE) {
-                throw new IllegalStateException("Loan cannot be returned.");
+                throw new LoanAlreadyReturnedException("Loan with ID = " + loanId + " is already returned.");
             }
 
             loan.setReturnedAt(LocalDate.now());

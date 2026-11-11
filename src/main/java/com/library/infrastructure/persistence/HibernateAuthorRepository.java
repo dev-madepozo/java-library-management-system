@@ -69,5 +69,4 @@ public class HibernateAuthorRepository implements AuthorRepository {
             entityManager.close();
         }
     }
-
 }

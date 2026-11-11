@@ -72,7 +72,6 @@ public class LibraryMenu {
         System.out.println("7. Register Loan");
         System.out.println("8. Return Book");
         System.out.println("9. List Member Loans");
-        System.out.println("10. Update Overdue Loans");
         System.out.println("0. Exit");
     }
 

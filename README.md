@@ -8,6 +8,12 @@ The project was built as a hands-on exercise in Java backend
 development, layered architecture, persistence, transaction management,
 and Hibernate.
 
+## Application Preview
+
+### Main Menu
+
+![Library Management System CLI](docs/screenshots/library-menu.png)
+
 ## Features
 
 -   Register and list authors.
@@ -218,7 +224,7 @@ src/main/resources/META-INF/persistence.xml
 
 4. Update the database connection properties with your local MySQL credentials:
 
-``` text
+``` xml
 <property name="jakarta.persistence.jdbc.url"
           value="jdbc:mysql://localhost:3306/library_db"/>
 
